@@ -1,0 +1,74 @@
+version: '3'
+services:
+  app: &app
+    build: .
+    command: python simple_search/app.py /usr/src/app/path
+    networks:
+      - ns
+    volumes:
+      - ./${path:?err}/:/usr/src/app/path
+      - .:/usr/src/app
+
+
+  format-imports:
+    <<: *app
+    command: isort -rc simple_search tests
+    networks:
+      - ns
+    volumes:
+      - .:/usr/src/app
+
+
+  check-format-imports:
+    <<: *app
+    command: isort --check-only -rc simple_search tests
+    depends_on: []
+    volumes:
+      - .:/usr/src/app
+
+
+  format:
+    <<: *app
+    command: black -l 79 --target-version py36 simple_search tests
+    networks:
+      - ns
+    volumes:
+      - .:/usr/src/app
+
+
+  check-format:
+    <<: *app
+    command: black -l 79 --target-version py36 --check simple_search tests
+    depends_on: []
+    volumes:
+      - .:/usr/src/app
+
+  style:
+    <<: *app
+    command: pylint simple_search
+    depends_on: []
+    volumes:
+      - .:/usr/src/app
+
+
+  test-unit:
+    <<: *app
+    command: py.test tests/unit -vv  -o junit_family=xunit2 --junitxml=reports/report_unit_tests.xml --cov . --cov-config .coveragerc --cov-report term-missing --cov-report xml:reports/coverage.xml
+    volumes:
+      - ./reports:/usr/src/app/reports
+      - .:/usr/src/app
+    depends_on: []
+
+
+  test-integration:
+    <<: *app
+    command: py.test tests/integration -vv
+    volumes:
+      - .:/usr/src/app
+    depends_on: []
+
+
+networks:
+  ns:
+    driver: bridge
+
