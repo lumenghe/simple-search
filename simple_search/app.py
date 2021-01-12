@@ -7,4 +7,5 @@ from typing import Counter as TypeCount
 from typing import Generator
 
 class SimpleSearch:
-    pass
+    """class of a command line text search engine."""
+
