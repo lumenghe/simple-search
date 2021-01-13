@@ -12,4 +12,6 @@ logger = logging.getLogger(__name__)
 
 class SimpleSearch:
     """class of a command line text search engine."""
-
+    def __init__(self):
+        logging.basicConfig(level=logging.INFO)
+        self._search_base = None
