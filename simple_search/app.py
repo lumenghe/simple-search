@@ -46,3 +46,22 @@ class SimpleSearch:
         :yield: string result which could be scores or not found,
             OR quit start function return None
         """
+        if path is None:
+            raise ValueError("No directory given to index.")
+
+        self._build_search_base(path)
+        while True:
+            print("search>", end="")
+            words = input()
+            if words == ":quit":
+                print("Bye.")
+                break
+
+            res = self.get_scores(words)
+            result = ""
+            if res:
+                for filepath, score in res:
+                    result += "{}: {:.0%}\n".format(filepath, score)
+            else:
+                result = "no matches found"
+            yield result
