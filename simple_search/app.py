@@ -72,3 +72,11 @@ class SimpleSearch:
         :return: a list of top 10 (maximum) matching filenames in rank order,
                 giving the rank score against each match
         """
+        word_set = set(words.split())
+        num_words = len(word_set)
+        scores = Counter()
+        for word in word_set:
+            for filepath in self._search_base.get(word, []):
+                scores[filepath] += 1 / num_words
+
+        return scores.most_common(10)
