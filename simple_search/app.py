@@ -67,4 +67,8 @@ class SimpleSearch:
             yield result
 
     def get_scores(self, words: str) -> TypeCount:
-        ...
+        """get files scores
+        :param words: words given on the prompt
+        :return: a list of top 10 (maximum) matching filenames in rank order,
+                giving the rank score against each match
+        """
