@@ -83,3 +83,11 @@ class SimpleSearch:
 
 def main():
     """ main function """
+    parser = argparse.ArgumentParser(description="combination premium payment")
+    parser.add_argument(
+        "path", type=str, help="path to directory containing text files"
+    )
+    args = parser.parse_args()
+    search = SimpleSearch()
+    for score in search.start(args.path):
+        print(score)
