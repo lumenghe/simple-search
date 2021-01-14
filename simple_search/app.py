@@ -39,3 +39,10 @@ class SimpleSearch:
                             file_path, err
                         ),
                     )
+
+    def start(self, path: str) -> Generator[str, None, None]:
+        """start simple search work function
+        :param path: path to diectory containing text files
+        :yield: string result which could be scores or not found,
+            OR quit start function return None
+        """
