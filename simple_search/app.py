@@ -22,3 +22,20 @@ class SimpleSearch:
         :param path: path to diectory containing text files
         :return: None
         """
+        self._search_base = {}
+        for root, _, files in os.walk(path):
+            for name in files:
+                file_path = os.path.join(root, name)
+                try:
+                    with open(file_path, "r") as file_content:
+                        for line in file_content:
+                            for word in line.split():
+                                self._search_base.setdefault(word, set()).add(
+                                    file_path
+                                )
+                except UnicodeDecodeError as err:
+                    logger.warning(
+                        "UnicodeDecodeError: {0} not indexed. {1}".format(
+                            file_path, err
+                        ),
+                    )
