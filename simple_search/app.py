@@ -65,3 +65,6 @@ class SimpleSearch:
             else:
                 result = "no matches found"
             yield result
+
+    def get_scores(self, words: str) -> TypeCount:
+        ...
