@@ -80,3 +80,6 @@ class SimpleSearch:
                 scores[filepath] += 1 / num_words
 
         return scores.most_common(10)
+
+def main():
+    """ main function """
