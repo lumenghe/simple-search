@@ -15,3 +15,6 @@ class SimpleSearch:
     def __init__(self):
         logging.basicConfig(level=logging.INFO)
         self._search_base = None
+
+    def _build_search_base(self, path: str) -> None:
+        ...
