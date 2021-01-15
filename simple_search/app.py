@@ -6,12 +6,12 @@ from collections import Counter
 from typing import Counter as TypeCount
 from typing import Generator
 
-
 logger = logging.getLogger(__name__)
 
 
 class SimpleSearch:
     """class of a command line text search engine."""
+
     def __init__(self):
         logging.basicConfig(level=logging.INFO)
         self._search_base = None
@@ -81,6 +81,7 @@ class SimpleSearch:
 
         return scores.most_common(10)
 
+
 def main():
     """ main function """
     parser = argparse.ArgumentParser(description="combination premium payment")
@@ -92,6 +93,6 @@ def main():
     for score in search.start(args.path):
         print(score)
 
+
 if __name__ == "__main__":
     main()
-
