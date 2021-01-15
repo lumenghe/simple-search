@@ -91,3 +91,7 @@ def main():
     search = SimpleSearch()
     for score in search.start(args.path):
         print(score)
+
+if __name__ == "__main__":
+    main()
+
