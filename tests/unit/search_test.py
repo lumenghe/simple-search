@@ -28,3 +28,8 @@ def test_start_path_not_none(input_mock):
             "no matches found",
         ]
 
+
+def test_get_scores():
+    simple_search = SimpleSearch()
+    simple_search._search_base = {"def": ["file1", "file2"], "dogs": ["file1"]}
+    print(simple_search.get_scores("def"))
