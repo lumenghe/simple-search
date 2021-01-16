@@ -16,3 +16,15 @@ def test_start_path_none():
         scores = simple_search.start(None)
         for _ in scores:
             assert True
+
+@patch("builtins.input")
+def test_start_path_not_none(input_mock):
+    input_mock.side_effect = ["def search", "dogs", ":quit"]
+    simple_search = SimpleSearch()
+    scores = simple_search.start("tests")
+    for ret in scores:
+        assert ret in [
+            "tests/integration/simple_search_test.py: 100%\ntests/unit/search_test.py: 50%\n",
+            "no matches found",
+        ]
+
