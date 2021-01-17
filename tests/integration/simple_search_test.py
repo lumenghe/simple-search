@@ -2,6 +2,7 @@ from unittest.mock import patch
 
 from simple_search import SimpleSearch
 
+
 @patch("builtins.input")
 def test_simple_search(input_mock):
     input_mock.side_effect = ["def search", ":quit"]
